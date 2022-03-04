@@ -22,21 +22,32 @@ gallery.addEventListener('click', getImg);
 function getImg(event) {
     event.preventDefault();
        
-     if (event.target.nodeName !== "IMG") {
-    return;
-     }
+    if (event.target.nodeName !== "IMG") {
+        return;
+    }
     
     const selectedImg = event.target.dataset.source;
-    console.log(selectedImg);
-    const modal = basicLightbox.create(`<img src="${selectedImg}">
-`);
+    const modal = basicLightbox.create(
+        `<img src="${selectedImg}">`,
+        {
+          
+            onShow: () => {
+                window.addEventListener('keydown', onEscKeyPress);
+    },
+            onClose: () => {
+                window.removeEventListener('keydown', onEscKeyPress);
+            }
+        }
+);
+    
+    function onEscKeyPress(e) {
+        // console.log(e);
+        if (e.code === 'Escape') {
+            modal.close();
+        }
+    }
+    
     modal.show();
-
- document.addEventListener('keydown', function(e) {
-     if (e.key === 'Escape') {
-         modal.close();
-     }
- });
  }
 
 

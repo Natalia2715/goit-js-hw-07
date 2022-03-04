@@ -8,8 +8,7 @@ function createGalleryItem() {
         <img
             class="gallery__image"
             src="${item.preview}"
-            alt="${item.description}"
-            
+            alt="${item.description}" 
         />
     </a>`).join('');    
 }
@@ -24,6 +23,5 @@ function fullImg(event) {
     if (event.target.nodeName !== "IMG") {
         return lightbox;
     }
-    
-}
+    }
 
